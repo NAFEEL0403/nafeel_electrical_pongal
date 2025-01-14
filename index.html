@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY PONGAL</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(221, 255, 0, 0.903);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 15px 30px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: rgb(139, 0, 95);
+        }
+
+        .inp {
+            width: 80%;
+            max-width: 300px;
+            height: 40px;
+            font-size: 16px;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+
+        .op {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            .inp {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .inp {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="op">Enter Your Name</h1>
+    <input id="inpt" class="inp" type="text" placeholder="Enter Your Name">
+    <button id="but">CLICK HERE</button>
+    <audio id="audio-player" hidden>
+        <source src="pongal.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const audioPlayer = document.getElementById("audio-player");
+        const button = document.getElementById("but");
+
+        button.addEventListener("click", () => {
+            const userInput = document.getElementById("inpt").value;
+            localStorage.setItem("userName", userInput);
+            audioPlayer.play();
+
+            audioPlayer.onplay = () => {
+                localStorage.setItem("audioPlaying", "true");
+                setInterval(() => {
+                    localStorage.setItem("audioTime", audioPlayer.currentTime);
+                }, 100);
+            };
+
+            setTimeout(() => {
+                window.location.href = "pongal2.html";
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
